@@ -1,10 +1,10 @@
-name: PHP CI
+name: php-ci.yml
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -17,10 +17,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: '8.2'
 
       - name: Install dependencies
-        run: composer install --no-interaction --no-progress --prefer-dist
+        run: |
+          composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PHPUnit tests
-        run: ./vendor/bin/phpunit --testdox
+        run: |
+          ./vendor/bin/phpunit --testdox tests
